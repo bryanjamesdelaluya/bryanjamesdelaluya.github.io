@@ -1,0 +1,312 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>BJCDL - Senior Software Engineer</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Source+Code+Pro:wght@400;500;600&display=swap');
+    * { box-sizing: border-box; }
+    body, html {
+      margin: 0; padding: 0; height: 100vh;
+      background: #0a0a0a; color: #00ff00;
+      font-family: 'Source Code Pro', monospace;
+      overflow: hidden;
+    }
+    .terminal-container {
+      height: 100vh;
+      background: radial-gradient(ellipse at center, #0a0a0a 0%, #000000 100%);
+      position: relative;
+      overflow: hidden;
+    }
+    .terminal-content {
+      height: 100vh;
+      padding: 20px;
+      overflow-y: auto;
+      background: rgba(0, 255, 0, 0.02);
+      box-shadow: inset 0 0 100px rgba(0, 255, 0, 0.1);
+    }
+    .terminal-output {
+      white-space: pre-wrap;
+      word-wrap: break-word;
+      margin-bottom: 10px;
+      line-height: 1.4;
+    }
+    .terminal-input-line {
+      display: flex;
+      align-items: center;
+      margin-top: 10px;
+    }
+    .prompt { color: #00ff00; margin-right: 8px; text-shadow: 0 0 5px #00ff00; }
+    .terminal-input {
+      background: transparent;
+      border: none;
+      color: #00ff00;
+      font-family: 'Source Code Pro', monospace;
+      font-size: 16px;
+      outline: none;
+      flex: 1;
+      text-shadow: 0 0 3px #00ff00;
+    }
+    .cursor {
+      background: #00ff00;
+      width: 8px;
+      height: 20px;
+      display: inline-block;
+      animation: blink 1s infinite;
+      box-shadow: 0 0 5px #00ff00;
+    }
+    @keyframes blink {
+      0%, 50% { opacity: 1; }
+      51%, 100% { opacity: 0; }
+    }
+    .ascii-art {
+      color: #00ff00;
+      text-shadow: 0 0 10px #00ff00;
+      font-size: 12px;
+      line-height: 1.2;
+      margin-bottom: 20px;
+    }
+    .command-output { color: #00ff00; opacity: 0.9; }
+    .error-output { color: #ff0066; text-shadow: 0 0 5px #ff0066; }
+    .info-output { color: #00ffff; text-shadow: 0 0 5px #00ffff; }
+    .highlight { color: #ffff00; text-shadow: 0 0 5px #ffff00; }
+    .terminal-content::-webkit-scrollbar {
+      width: 8px;
+    }
+    .terminal-content::-webkit-scrollbar-thumb {
+      background: #00ff00;
+      border-radius: 4px;
+      box-shadow: 0 0 5px #00ff00;
+    }
+    .scan-line {
+      position: absolute;
+      top: 0; left: 0; right: 0;
+      height: 2px;
+      background: linear-gradient(90deg, transparent, #00ff00, transparent);
+      animation: scan 2s linear infinite;
+      opacity: 0.3;
+    }
+    @keyframes scan {
+      0% { top: 0; }
+      100% { top: 100%; }
+    }
+  </style>
+</head>
+<body>
+  <div class="terminal-container">
+    <div class="scan-line"></div>
+    <div class="terminal-content" id="terminal">
+      <div class="ascii-art">
+<pre>
+██████╗      ██╗ ██████╗██████╗ ██╗     
+██╔══██╗     ██║██╔════╝██╔══██╗██║     
+██████╔╝     ██║██║     ██║  ██║██║     
+██╔══██╗██   ██║██║     ██║  ██║██║     
+██████╔╝╚█████╔╝╚██████╗██████╔╝███████╗
+╚═════╝  ╚════╝  ╚═════╝╚═════╝ ╚══════╝
+</pre>
+      </div>
+      <div class="terminal-output">
+<span class="highlight">Bryan James Dela Luya</span>
+Senior Backend Engineer | PHP/Laravel Specialist
+
+Type <span class="highlight">'help'</span> to begin exploring.
+      </div>
+      <div class="terminal-input-line">
+        <span class="prompt">visitor@bjcdl:~$</span>
+        <input type="text" class="terminal-input" id="commandInput" autocomplete="off" spellcheck="false">
+        <span class="cursor"></span>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    document.addEventListener('DOMContentLoaded', () => {
+      const terminal = document.getElementById('terminal');
+      const commandInput = document.getElementById('commandInput');
+
+      commandInput.focus();
+
+      const maintainFocus = () => {
+        if (document.activeElement !== commandInput) {
+            commandInput.focus();
+        }
+    };
+
+    terminal.addEventListener('click', maintainFocus);
+    document.addEventListener('keydown', maintainFocus);
+
+        const commands = {
+        summary: () => `--------------------------------------------------------------------------------------------------------
+<strong>Senior Software Engineer | Technical Profile</strong>
+
+Seasoned backend architect with 9+ years of expertise in distributed systems, technical debt remediation, and high-availability infrastructure. Specialized in:
+• <strong>Legacy System Modernization</strong>: Leading multi-year initiatives to refactor monolithic PHP/Laravel applications into modular, maintainable services
+• <strong>Cloud-Native Architecture</strong>: AWS-based solutions with containerized deployments and CI/CD optimization
+• <strong>Performance Engineering</strong>: Query optimization (MySQL/Redis), concurrency patterns, and scaling strategies for 10K+ RPS systems
+• <strong>Technical Leadership</strong>: Establishing engineering standards, mentoring teams, and implementing governance for critical production systems
+
+Currently driving platform reliability and modernization efforts at Career Team, with focus on:
+- Security hardening and compliance remediation
+- Deployment pipeline automation (GitHub Actions)
+- Progressive migration to event-driven architectures
+
+Recognized for delivering complex technical transformations while maintaining 99.95% uptime SLA.`,
+
+    skills: () => `--------------------------------------------------------------------------------------------------------
+<strong>Technical Expertise | Principal Engineer Level</strong>
+
+<strong>Core Languages & Frameworks:</strong>
+• PHP (Laravel/Symfony Specialist): 9+ years building enterprise-grade applications
+• Modern JavaScript (Vue/React): Architecting complex SPA frontends
+• Legacy Ecosystem Mastery: CodeIgniter migration strategies, jQuery modernization paths
+
+<strong>Systems Architecture & API Design:</strong>
+• RESTful Microservices: Designed APIs serving 5M+ monthly requests
+• Auth Systems: OAuth2 Connect implementations
+• Payment Infrastructure: End-to-end PCI-compliant solutions (Stripe/PayPal/Bitpay)
+• Enterprise Integrations: ERP (Avalara), Logistics (ShipBob), Marketing Automation (Klaviyo)
+
+<strong>Data Layer Engineering:</strong>
+• SQL Optimization: MySQL/PostgreSQL performance tuning (explain plans, index strategies)
+• Redis Architectures: Caching layers, rate limiting, real-time features
+• Cloud Storage Patterns: AWS S3 lifecycle policies, RDS configurations
+
+<strong>DevOps & Platform Engineering:</strong>
+• Infrastructure as Code: Terraform-managed AWS environments
+• CI/CD Pipelines: GitHub Actions workflows, zero-downtime deployments
+• Production Systems: Ubuntu server hardening, SSL/TLS management
+• Queue Systems: Redis-backed job queues with failover mechanisms
+
+<strong>Specialized Competencies:</strong>
+• Legacy Modernization: Monolith decomposition strategies
+• Security Leadership: Conducted SOC2-aligned audits
+• Embedded Systems: Biometric/RFID integration (ZKTeco/SIM800C)
+• Scalable Patterns: Multi-tenant SaaS architectures, distributed POS systems`,
+
+experience: () => `--------------------------------------------------------------------------------------------------------
+<strong>Technical Leadership Experience</strong>
+
+<strong>CareerTeam LLC — Senior Software Engineer (May 2025-Present)</strong>
+• <u>Legacy Systems Modernization</u>: Lead architect for refactoring monolithic PHP applications into maintainable, testable services—reducing critical bugs by 60%
+• <u>Production Stability</u>: Diagnose and resolve Tier-1 client issues in SLA-bound environments (99.95% uptime)
+• <u>Security Leadership</u>: Implement OWASP standards, static analysis tooling, and audit trails across 15+ codebases
+• <u>SDLC Transformation</u>: Introduced GitFlow, automated testing (PHPUnit/Pest), and peer review workflows
+• <u>DevOps Governance</u>: Designed containerized deployment pipelines (Docker/GitHub Actions) reducing release cycles from days → hours
+
+<strong>Dog and Rooster, Inc. — Senior Software Engineer / Delivery Lead (May 2021–May 2025)</strong>
+• <u>Technical Leadership</u>: Established engineering standards and governance for 15+ concurrent Laravel projects
+• <u>Cloud Architecture</u>: Designed AWS ecosystems (EC2/RDS/) serving 500K+ monthly users
+• <u>API Strategy</u>: Architected REST/XML microservices for e-commerce/LMS platforms with 99.97% uptime
+• <u>DevOps</u>: Implemented zero-downtime deployment pipelines and automated monitoring solutions
+• <u>Legacy Modernization</u>: Led PHP 5.6→8.x migrations for mission-critical client systems
+
+<strong>Hiraya MNL — Senior Software Engineer (March 2020–June 2021)</strong>
+• <u>Full-Stack Architecture</u>: Delivered Vue.js/Laravel solutions with Inertia.js for dynamic SPAs
+• <u>Cross-Functional Leadership</u>: Served as technical liaison between design/backend teams
+• <u>Performance Optimization</u>: Reduced frontend bundle sizes by 42% through code-splitting
+
+<strong>Apptopus Inc. — Software Engineer → Tech Lead (March 2019–August 2020)</strong>
+• <u>Systems Architecture</u>: Built campus management platforms handling 10K+ daily transactions
+• <u>Hardware Integration</u>: Pioneered ZKTeco/SIM800C solutions for biometric attendance systems
+• <u>Technical Debt Reduction</u>: Refactored monolithic VB.NET/PHP systems to Laravel microservices
+
+<strong>Strategic Consulting Engagements (2018–Present)</strong>
+• <u>Enterprise Solutions</u>: Delivered 12+ production systems including:
+  - Multi-tenant POS/inventory platforms with barcode/RFID integrations
+  - PCI-compliant payment gateways (Stripe/PayPal/Authorize.net)
+  - AWS-hosted resort management systems with real-time booking engines
+• <u>Technical Advisory</u>: Modernized legacy codebases for Tepora Group, Granby Colleges, Amor Laut`,
+
+        projects: () => `--------------------------------------------------------------------------------------------------------
+<strong>Projects & Portfolio</strong>
+<strong>Key Projects:</strong>
+- Bullion Standard – High-integration Laravel e-commerce with OpenAI, Plaid, Bitpay
+- MuseRoom – Music sharing platform built on Laravel + VueJS
+- InjureFree – Laravel app for compliance and injury management
+- AMS – Biometric-based DTR + Payroll (ZKTeco)
+- MedStaff – Doctor booking platform with smart KYC module
+- Tradeline Supply – Fintech app built on Node.js, VueJS, MongoDB
+<strong>Portfolio Links:</strong>
+- https://museroom.co/
+- https://bullionstandard.com/
+- https://medstaff.care/
+- https://www.injurefree.com/`,
+
+        softskills: () => `--------------------------------------------------------------------------------------------------------
+<strong>Soft Skills & Leadership</strong>
+- Strong communicator with client-facing experience
+- Drives development standards, team workflows, and best practices
+- Experienced in Agile and startup environments
+- Leads code reviews and provides mentorship to junior developers
+- Strategic in analyzing and resolving legacy system issues`,
+
+        location: () => `--------------------------------------------------------------------------------------------------------
+<strong>Location & Availability</strong>
+Based in: Trece Martires City, Cavite, Philippines
+Open to: <s>Full-time</s>, Remote, or Contract work
+Availability: Immediate or negotiable`,
+
+        social: () => `--------------------------------------------------------------------------------------------------------
+<strong>Social Profiles</strong>
+GitHub: github.com/bcdl
+LinkedIn: linkedin.com/in/bjcdl`,
+
+        help: () => `<div class="info-output">Available commands:</div><div class="command-output">
+<span class="command-name">summary</span>    - Professional background and key qualifications  
+<span class="command-name">skills</span>     - Technical stack, tools, and engineering expertise  
+<span class="command-name">experience</span> - Work history, roles, and system architecture contributions  
+<span class="command-name">projects</span>   - Major technical implementations and case studies  
+<span class="command-name">softskills</span> - Leadership, communication, and problem-solving approach  
+<span class="command-name">location</span>   - Current timezone and remote work availability  
+<span class="command-name">social</span>     - Professional networks and open-source presence  
+<span class="command-name">clear</span>      - Reset terminal output  
+        </div>`,
+
+        clear: () => {
+            terminal.querySelectorAll('.terminal-output').forEach(el => el.remove());
+            return '';
+        }
+        };
+
+      function executeCommand(input) {
+        const line = document.createElement('div');
+        line.className = 'terminal-output';
+        line.innerHTML = `<span class="prompt">visitor@bjcdl:~$</span> ${input}`;
+        terminal.insertBefore(line, document.querySelector('.terminal-input-line'));
+
+        const cmd = input.trim().toLowerCase();
+        const output = commands[cmd]?.();
+        if (output !== undefined) {
+          const out = document.createElement('div');
+          out.className = 'terminal-output';
+          out.innerHTML = output;
+          terminal.insertBefore(out, document.querySelector('.terminal-input-line'));
+        } else {
+          const err = document.createElement('div');
+            err.className = 'terminal-output error-output';
+            err.innerHTML = `bash: ${cmd}: command not found
+Available commands: Type <span class="highlight">'help'</span> for options`;
+            terminal.insertBefore(err, document.querySelector('.terminal-input-line'));
+        }
+
+        terminal.scrollTop = terminal.scrollHeight;
+        commandInput.focus();
+      }
+
+      commandInput.addEventListener('keydown', e => {
+        if (e.key === 'Enter') {
+          const val = commandInput.value;
+          if (val) executeCommand(val);
+          commandInput.value = '';
+          e.preventDefault();
+        }
+      });
+
+      setInterval(maintainFocus, 1000);
+    });
+  </script>
+</body>
+</html>
