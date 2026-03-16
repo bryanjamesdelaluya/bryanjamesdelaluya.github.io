@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en" data-bs-theme="dark">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" type="image/png" href="../../assets/favicon.png">
+    <title>Getting Started with AI in Web Development | Bryan James Dela Luya</title>
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+    <!-- Bootstrap 5 CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Lucide Icons -->
+    <script src="https://unpkg.com/lucide@latest"></script>
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="../../css/style.css">
+</head>
+<body>
+    <div class="main-container py-5">
+        <header class="header-tile mb-5 position-relative">
+            <button id="theme-toggle" class="btn btn-surface p-2 rounded-3 border position-absolute top-0 end-0 m-4" aria-label="Toggle theme">
+                <i data-lucide="sun" id="theme-icon-light" size="20"></i>
+                <i data-lucide="moon" id="theme-icon-dark" class="d-none" size="20"></i>
+            </button>
+            <a href="../index.html" class="btn btn-surface btn-sm px-3 rounded-3 border d-inline-flex align-items-center gap-2 mb-4">
+                <i data-lucide="arrow-left" size="16"></i> Back to Blog
+            </a>
+            <div class="text-muted extra-small mb-2">March 10, 2026 • 6 min read</div>
+            <h1 class="h1 fw-bold mb-0">Getting Started with AI in Web Development</h1>
+        </header>
+
+        <img src="https://images.unsplash.com/photo-1677442136019-21780ecad995?w=1000&h=400&fit=crop" class="img-fluid rounded-4 mb-5 border" alt="AI and code">
+
+        <article class="tile p-5">
+            <div class="text-secondary leading-relaxed">
+                <p class="mb-4">As a Laravel-focused developer, I’ve been exploring how AI fits into the daily workflow—from writing boilerplate to debugging and refactoring. Here’s a practical take on where it helps and how to start.</p>
+
+                <h2 class="h4 fw-bold text-white mb-3">Why Bother with AI as a Web Dev?</h2>
+                <p class="mb-4">AI doesn’t replace solid fundamentals. It speeds up repetitive tasks, suggests tests, and helps explore new APIs or frameworks. For PHP and Laravel, that can mean faster feature scaffolding, clearer docblocks, and fewer “syntax rabbit holes.”</p>
+
+                <h2 class="h4 fw-bold text-white mb-3">Ways I Use It Day to Day</h2>
+                <p class="mb-4">I use AI to draft controller methods, generate Laravel migrations from descriptions, and rewrite comments for clarity. I always review and run tests—AI is a starting point, not the final source of truth.</p>
+
+                <h2 class="h4 fw-bold text-white mb-3">Keeping Your Stack in Mind</h2>
+                <p class="mb-4">When prompting, mention “Laravel,” “PHP 8,” or your DB so the output matches your stack. The more context you give, the more usable the code and the less time you spend fixing wrong assumptions.</p>
+
+                <blockquote class="border-start border-primary border-4 ps-4 py-2 my-5 italic text-white bg-surface-hover rounded-3">
+                    "Use AI to move faster on the boring stuff so you can focus on architecture and product logic."
+                </blockquote>
+
+                <h2 class="h4 fw-bold text-white mb-3">Next Steps</h2>
+                <p class="mb-0">Try one workflow: e.g. “generate a Laravel policy for a Post model” or “suggest error messages for this form.” Run the code, adjust it, and see where it saves you time. If you’re curious about running models locally, check out my post on <a href="../setting-up-ollama-locally/index.html" class="text-primary">setting up Ollama for local LLMs</a>.</p>
+            </div>
+        </article>
+
+        <footer class="mt-5 pt-4 border-top text-center">
+            <div class="text-muted extra-small">&copy; 2026 Bryan James Dela Luya</div>
+        </footer>
+    </div>
+    <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+    <script src="../../js/script.js"></script>
+    <script>
+        $(document).ready(function() { lucide.createIcons(); });
+    </script>
+</body>
+</html>

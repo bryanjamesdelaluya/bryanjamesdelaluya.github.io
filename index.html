@@ -1,359 +1,420 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" data-bs-theme="dark">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>BJCDL - Software Engineer</title>
-  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
-<style>
-    @import url('https://fonts.googleapis.com/css2?family=Source+Code+Pro:wght@400;500;600&display=swap');
-    * { box-sizing: border-box; }
-    body, html {
-      margin: 0; padding: 0; height: 100vh;
-      background: #0a0a0a; color: #00ff00;
-      font-family: 'Source Code Pro', monospace;
-      overflow: hidden;
-    }
-    .terminal-container {
-      height: 100vh;
-      background: radial-gradient(ellipse at center, #0a0a0a 0%, #000000 100%);
-      position: relative;
-      overflow: hidden;
-    }
-    .terminal-content {
-      height: 100vh;
-      padding: 15px;
-      overflow-y: auto;
-      background: rgba(0, 255, 0, 0.02);
-      box-shadow: inset 0 0 100px rgba(0, 255, 0, 0.1);
-      word-break: break-word;
-    }
-    .terminal-output {
-      white-space: pre-wrap;
-      word-wrap: break-word;
-      margin-bottom: 10px;
-      line-height: 1.4;
-      overflow-wrap: break-word;
-    }
-    .terminal-input-line {
-      display: flex;
-      align-items: center;
-      margin-top: 10px;
-      flex-wrap: wrap;
-    }
-    .prompt { 
-      color: #00ff00; 
-      margin-right: 8px; 
-      text-shadow: 0 0 5px #00ff00;
-      white-space: nowrap;
-    }
-    .terminal-input {
-      background: transparent;
-      border: none;
-      color: #00ff00;
-      font-family: 'Source Code Pro', monospace;
-      font-size: 16px;
-      outline: none;
-      flex: 1;
-      min-width: 200px;
-      text-shadow: 0 0 3px #00ff00;
-    }
-    .cursor {
-      background: #00ff00;
-      width: 8px;
-      height: 20px;
-      display: inline-block;
-      animation: blink 1s infinite;
-      box-shadow: 0 0 5px #00ff00;
-    }
-    @keyframes blink {
-      0%, 50% { opacity: 1; }
-      51%, 100% { opacity: 0; }
-    }
-    .ascii-art {
-      color: #00ff00;
-      text-shadow: 0 0 10px #00ff00;
-      font-size: 12px;
-      line-height: 1.2;
-      margin-bottom: 20px;
-      overflow-x: auto;
-      white-space: pre;
-    }
-    .command-output { color: #00ff00; opacity: 0.9; }
-    .error-output { color: #ff0066; text-shadow: 0 0 5px #ff0066; }
-    .info-output { color: #00ffff; text-shadow: 0 0 5px #00ffff; }
-    .highlight { color: #ffff00; text-shadow: 0 0 5px #ffff00; }
-    .terminal-content::-webkit-scrollbar {
-      width: 8px;
-    }
-    .terminal-content::-webkit-scrollbar-thumb {
-      background: #00ff00;
-      border-radius: 4px;
-      box-shadow: 0 0 5px #00ff00;
-    }
-    .scan-line {
-      position: absolute;
-      top: 0; left: 0; right: 0;
-      height: 2px;
-      background: linear-gradient(90deg, transparent, #00ff00, transparent);
-      animation: scan 2s linear infinite;
-      opacity: 0.3;
-    }
-    @keyframes scan {
-      0% { top: 0; }
-      100% { top: 100%; }
-    }
-
-    /* Responsive adjustments */
-    @media (max-width: 768px) {
-      .terminal-content {
-        padding: 10px;
-      }
-      .terminal-input {
-        font-size: 14px;
-        min-width: 150px;
-      }
-      .ascii-art {
-        font-size: 10px;
-      }
-      .terminal-output {
-        font-size: 14px;
-      }
-    }
-
-    @media (max-width: 480px) {
-      .terminal-content {
-        padding: 8px;
-      }
-      .terminal-input {
-        font-size: 13px;
-        min-width: 120px;
-      }
-      .ascii-art {
-        font-size: 8px;
-      }
-      .terminal-output {
-        font-size: 13px;
-      }
-      .prompt {
-        font-size: 14px;
-      }
-    }
-  </style>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" type="image/png" href="assets/favicon.png">
+    <title>Bryan James Dela Luya | Full-Stack Developer & Tech Lead</title>
+    <meta name="description" content="10+ years of experience building enterprise web applications. Specialized in Laravel, Node.js, DevOps, and AWS.">
+    
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+    
+    <!-- Bootstrap 5 CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Lucide Icons -->
+    <script src="https://unpkg.com/lucide@latest"></script>
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="css/style.css">
 </head>
 <body>
-  <div class="terminal-container">
-    <div class="scan-line"></div>
-    <div class="terminal-content" id="terminal">
-      <div class="ascii-art">
-<pre>
-██████╗      ██╗ ██████╗██████╗ ██╗     
-██╔══██╗     ██║██╔════╝██╔══██╗██║     
-██████╔╝     ██║██║     ██║  ██║██║     
-██╔══██╗██   ██║██║     ██║  ██║██║     
-██████╔╝╚█████╔╝╚██████╗██████╔╝███████╗
-╚═════╝  ╚════╝  ╚═════╝╚═════╝ ╚══════╝
-</pre>
-      </div>
-      <div class="terminal-output">
-<span class="highlight">Bryan James C. Dela Luya</span>
-Senior Backend Engineer | PHP/Laravel Specialist
 
-Type <span class="highlight">'help'</span> to begin exploring.
-      </div>
-      <div class="terminal-input-line">
-        <span class="prompt">visitor@bjcdl:~$</span>
-        <input type="text" class="terminal-input" id="commandInput" autocomplete="off" spellcheck="false">
-        <span class="cursor"></span>
-      </div>
+    <div class="main-container py-5">
+        <!-- Header Tile -->
+        <header class="header-tile mb-4 position-relative">
+            <button id="theme-toggle" class="btn btn-surface p-2 rounded-3 border position-absolute top-0 end-0 m-4" aria-label="Toggle theme">
+                <i data-lucide="sun" id="theme-icon-light" size="20"></i>
+                <i data-lucide="moon" id="theme-icon-dark" class="d-none" size="20"></i>
+            </button>
+            <div class="row align-items-center g-4">
+                <div class="col-auto">
+                    <img src="./assets/photo.png" alt="Bryan James" class="profile-img rounded-4 shadow">
+                </div>
+                <div class="col-md">
+                    <div>
+                        <h1 class="h2 fw-bold mb-1">Bryan James Dela Luya <i data-lucide="badge-check" class="text-primary d-inline-block" size="20"></i></h1>
+                        <div class="text-muted small mb-2 d-flex align-items-center gap-2">
+                            <i data-lucide="map-pin" size="14"></i> Cavite, Philippines
+                        </div>
+                        <div class="fw-medium text-secondary mb-3">Tech Lead | Full-Stack Developer | CEO</div>
+                        <div class="d-flex flex-wrap gap-2">
+                            <a href="https://calendly.com/delaluya-bryanjames/30min" target="_blank" class="btn btn-primary btn-sm px-3 rounded-3 d-flex align-items-center gap-2">
+                                <i data-lucide="calendar" size="16"></i> Schedule a Call
+                            </a>
+                            <a href="mailto:bryanjamesdelaluya@gmail.com" class="btn btn-outline-primary btn-sm px-3 rounded-3 d-flex align-items-center gap-2">
+                                <i data-lucide="mail" size="16"></i> Send Email
+                            </a>
+                            <a href="#" class="btn btn-outline-secondary btn-sm px-3 rounded-3 d-flex align-items-center gap-2">
+                                <i data-lucide="file-text" size="16"></i> Resume
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </header>
+
+        <div class="row g-4">
+            <!-- Left Column -->
+            <div class="col-lg-6">
+                <!-- About Me Tile -->
+                <div class="tile p-4 mb-4">
+                    <div class="d-flex align-items-center gap-2 mb-3">
+                        <i data-lucide="info" class="text-primary" size="18"></i>
+                        <h2 class="h5 fw-bold mb-0">About Me</h2>
+                    </div>
+                    <p class="text-secondary small leading-relaxed mb-0">
+                        I'm a dedicated Tech Lead and Full-Stack Developer with a strong foundation in building enterprise-grade web applications. My work centers on architecting scalable, user-centric solutions, integrating 10+ years of experience to deliver high-performance SaaS systems.
+                        <br><br>
+                        Known for my results-driven approach, I excel at designing and deploying robust digital solutions. My ability to adapt quickly to new technologies empowers me to stay ahead in the ever-evolving tech landscape.
+                    </p>
+                </div>
+
+                <!-- Recent Projects Tile -->
+                <div class="tile p-4">
+                    <div class="d-flex justify-content-between align-items-center mb-4">
+                        <div class="d-flex align-items-center gap-2">
+                            <i data-lucide="layout-grid" class="text-primary" size="18"></i>
+                            <h2 class="h5 fw-bold mb-0">Recent Projects</h2>
+                        </div>
+                        <a href="projects" class="text-muted small text-decoration-none">View All <i data-lucide="chevron-right" size="14"></i></a>
+                    </div>
+                    
+                    <div class="project-item mb-4 pb-4 border-bottom">
+                        <div class="d-flex justify-content-between align-items-start mb-2">
+                            <h3 class="h6 fw-bold mb-0">HookWars.io</h3>
+                            <div class="d-flex gap-2">
+                                <a href="https://hookwars.io" target="_blank" rel="noopener" class="text-muted"><i data-lucide="external-link" size="14"></i></a>
+                            </div>
+                        </div>
+                        <p class="text-secondary extra-small mb-2">
+                            A fast-paced multiplayer hook battle game. Cast your hook, drag enemies into the pit, and outlast the other team. Play free online — no download required!
+                        </p>
+                    </div>
+
+                    <div class="project-item mb-4 pb-4 border-bottom">
+                        <div class="d-flex justify-content-between align-items-start mb-2">
+                            <h3 class="h6 fw-bold mb-0">Sig-Nexus.com</h3>
+                            <div class="d-flex gap-2">
+                                <a href="https://sig-nexus.com" target="_blank" rel="noopener" class="text-muted"><i data-lucide="external-link" size="14"></i></a>
+                            </div>
+                        </div>
+                        <p class="text-secondary extra-small mb-2">
+                            A secure global medical network to connect doctors, share research, grow careers, and collaborate safely.
+                        </p>
+                    </div>
+
+                    <div class="project-item">
+                        <div class="d-flex justify-content-between align-items-start mb-2">
+                            <h3 class="h6 fw-bold mb-0">Health is Wealth Living</h3>
+                            <div class="d-flex gap-2">
+                                <i data-lucide="link" size="14" class="text-muted"></i>
+                            </div>
+                        </div>
+                        <p class="text-secondary extra-small mb-2">
+                            A trusted platform designed to connect families with skilled and verified care professionals.
+                        </p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Right Column -->
+            <div class="col-lg-6">
+                <!-- Experience Tile -->
+                <div class="tile p-4 mb-4">
+                    <div class="d-flex align-items-center gap-2 mb-4">
+                        <i data-lucide="briefcase" class="text-primary" size="18"></i>
+                        <h2 class="h5 fw-bold mb-0">Experience</h2>
+                    </div>
+                    <div class="mini-timeline">
+                        <div class="m-timeline-item m-timeline-item-first mb-4">
+                            <div class="fw-bold small mb-1">Senior Software Engineer | Tech Lead</div>
+                            <div class="d-flex justify-content-between align-items-baseline flex-wrap gap-1">
+                                <span class="text-primary extra-small">Carear TEAM</span>
+                                <span class="text-muted extra-small">May 2025 — Present</span>
+                            </div>
+                        </div>
+                        <div class="m-timeline-item mb-4">
+                            <div class="fw-bold small mb-1">Senior Software Engineer | Website Delivery Lead</div>
+                            <div class="d-flex justify-content-between align-items-baseline flex-wrap gap-1">
+                                <span class="text-primary extra-small">Dog and Rooster</span>
+                                <span class="text-muted extra-small">May 2021 — May 2025</span>
+                            </div>
+                        </div>
+                        <div class="experience-more" id="experienceMore">
+                            <div class="m-timeline-item mb-4">
+                                <div class="fw-bold small mb-1">Senior Software Engineer</div>
+                                <div class="d-flex justify-content-between align-items-baseline flex-wrap gap-1">
+                                    <span class="text-primary extra-small">Hiraya MNL</span>
+                                    <span class="text-muted extra-small">March 2020 — June 2021</span>
+                                </div>
+                            </div>
+                            <div class="m-timeline-item mb-4">
+                                <div class="fw-bold small mb-1">Senior Developer</div>
+                                <div class="d-flex justify-content-between align-items-baseline flex-wrap gap-1">
+                                    <span class="text-primary extra-small">Apptopus Inc</span>
+                                    <span class="text-muted extra-small">September 2019 — August 2020</span>
+                                </div>
+                            </div>
+                            <div class="m-timeline-item mb-4">
+                                <div class="fw-bold small mb-1">Junior Developer</div>
+                                <div class="d-flex justify-content-between align-items-baseline flex-wrap gap-1">
+                                    <span class="text-primary extra-small">Apptopus Inc</span>
+                                    <span class="text-muted extra-small">March 2019 — September 2019</span>
+                                </div>
+                            </div>
+                        </div>
+                        <button class="btn btn-surface btn-sm w-100 mt-2 rounded-3 border" id="toggleExperience">
+                            View More
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Tech Stack Tile -->
+                <div class="tile p-4">
+                    <div class="d-flex align-items-center gap-2 mb-4">
+                        <i data-lucide="cpu" class="text-primary" size="18"></i>
+                        <h2 class="h5 fw-bold mb-0">Tech Stack</h2>
+                    </div>
+                    <div class="stack-grid">
+                        <div class="stack-item rounded-3 border bg-surface">
+                            <div class="stack-icon-wrap">
+                                <img src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/laravel/laravel-original.svg" alt="Laravel" class="stack-icon">
+                            </div>
+                            <span class="stack-label">Laravel</span>
+                        </div>
+                        <div class="stack-item rounded-3 border bg-surface">
+                            <div class="stack-icon-wrap">
+                                <img src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/nodejs/nodejs-original-wordmark.svg" alt="Node.js" class="stack-icon stack-icon-wordmark">
+                            </div>
+                            <span class="stack-label">Node.js</span>
+                        </div>
+                        <div class="stack-item rounded-3 border bg-surface">
+                            <div class="stack-icon-wrap">
+                                <img src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/amazonwebservices/amazonwebservices-original-wordmark.svg" alt="AWS" class="stack-icon stack-icon-aws">
+                            </div>
+                            <span class="stack-label">Cloud</span>
+                        </div>
+                        <div class="stack-item rounded-3 border bg-surface">
+                            <div class="stack-icon-wrap">
+                                <img src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/mysql/mysql-original.svg" alt="MySQL" class="stack-icon">
+                            </div>
+                            <span class="stack-label">MySQL</span>
+                        </div>
+                        <div class="stack-item rounded-3 border bg-surface">
+                            <div class="stack-icon-wrap">
+                                <img src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/react/react-original.svg" alt="React" class="stack-icon">
+                            </div>
+                            <span class="stack-label">React</span>
+                        </div>
+                        <div class="stack-item rounded-3 border bg-surface">
+                            <div class="stack-icon-wrap">
+                                <img src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/vuejs/vuejs-original-wordmark.svg" alt="Vue.js" class="stack-icon stack-icon-wordmark">
+                            </div>
+                            <span class="stack-label">Vue.js</span>
+                        </div>
+                        <div class="stack-item rounded-3 border bg-surface">
+                            <div class="stack-icon-wrap">
+                                <i data-lucide="sparkles" class="stack-icon-lucide" size="28"></i>
+                            </div>
+                            <span class="stack-label">AI</span>
+                        </div>
+                        <div class="stack-item rounded-3 border bg-surface">
+                            <div class="stack-icon-wrap">
+                                <img src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/github/github-original.svg" alt="GitHub" class="stack-icon">
+                            </div>
+                            <span class="stack-label">GitHub</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Latest Blogs Tile -->
+                <div class="tile p-4 mt-4">
+                    <div class="d-flex justify-content-between align-items-center mb-4">
+                        <div class="d-flex align-items-center gap-2">
+                            <i data-lucide="book-open" class="text-primary" size="18"></i>
+                            <h2 class="h5 fw-bold mb-0">Latest Blogs</h2>
+                        </div>
+                        <a href="blogs/index.html" class="text-muted small text-decoration-none">Read All <i data-lucide="chevron-right" size="14"></i></a>
+                    </div>
+                    <div class="blog-list">
+                        <a href="blogs/ai-in-web-development/index.html" class="blog-item mb-3 pb-3 border-bottom d-block text-decoration-none">
+                            <div class="text-muted extra-small mb-1">March 10, 2026</div>
+                            <h3 class="h6 fw-bold mb-1 text-white">Getting Started with AI in Web Development</h3>
+                            <p class="text-secondary extra-small mb-0">Practical ways to use AI in your Laravel and PHP workflow—without replacing the basics.</p>
+                        </a>
+                        <a href="blogs/scaling-laravel-enterprise/index.html" class="blog-item d-block text-decoration-none">
+                            <div class="text-muted extra-small mb-1">March 12, 2026</div>
+                            <h3 class="h6 fw-bold mb-1 text-white">Scaling Laravel for Enterprise</h3>
+                            <p class="text-secondary extra-small mb-0">Best practices for handling millions of requests using horizontal scaling, Redis, and queues.</p>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Bottom Row: Certifications & Recommendations -->
+        <div class="row g-4 mt-1">
+            <div class="col-lg-4">
+                <div class="tile p-4 h-100">
+                    <div class="d-flex align-items-center gap-2 mb-4">
+                        <i data-lucide="award" class="text-primary" size="18"></i>
+                        <h2 class="h5 fw-bold mb-0">Certifications</h2>
+                    </div>
+                    <div class="d-flex flex-column gap-2">
+                        <div class="badge-item d-flex align-items-center gap-2 p-2 px-3 rounded-3 border bg-surface">
+                            <i data-lucide="shield-check" class="text-success" size="14"></i>
+                            <span class="extra-small fw-medium">Laravel Foundations</span>
+                        </div>
+                        <div class="badge-item d-flex align-items-center gap-2 p-2 px-3 rounded-3 border bg-surface">
+                            <i data-lucide="shield-check" class="text-success" size="14"></i>
+                            <span class="extra-small fw-medium">Git Essentials</span>
+                        </div>
+                        <div class="badge-item d-flex align-items-center gap-2 p-2 px-3 rounded-3 border bg-surface">
+                            <i data-lucide="shield-check" class="text-success" size="14"></i>
+                            <span class="extra-small fw-medium">PHP Fundamentals</span>
+                        </div>
+                        <div class="badge-item d-flex align-items-center gap-2 p-2 px-3 rounded-3 border bg-surface">
+                            <i data-lucide="shield-check" class="text-success" size="14"></i>
+                            <span class="extra-small fw-medium">Object-Oriented Programming</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-8">
+                <div class="tile p-4 h-100">
+                    <div class="d-flex justify-content-between align-items-center mb-4">
+                        <div class="d-flex align-items-center gap-2">
+                            <i data-lucide="users" class="text-primary" size="18"></i>
+                            <h2 class="h5 fw-bold mb-0">Recommendations</h2>
+                        </div>
+                        <div class="d-flex gap-2">
+                            <button class="btn btn-surface btn-sm p-1 rounded-3 border" data-bs-target="#recommendationsCarousel" data-bs-slide="prev">
+                                <i data-lucide="chevron-left" size="16"></i>
+                            </button>
+                            <button class="btn btn-surface btn-sm p-1 rounded-3 border" data-bs-target="#recommendationsCarousel" data-bs-slide="next">
+                                <i data-lucide="chevron-right" size="16"></i>
+                            </button>
+                        </div>
+                    </div>
+                    <div id="recommendationsCarousel" class="carousel slide" data-bs-ride="carousel">
+                        <div class="carousel-inner">
+                            <div class="carousel-item active">
+                                <div class="testimonial-mini p-4 rounded-3 border bg-surface">
+                                    <p class="small text-secondary italic mb-4">"Working with Nitro Tech Media gave me hands on experience in real projects. The team taught me how to build a clean, minimal website from start to launch. The founder explained each step in clear language."</p>
+                                    <div class="d-flex align-items-center gap-3">
+                                        <img src="https://ui-avatars.com/api/?name=Dawn+Cruz&size=40&background=363636&color=fff" class="rounded-circle border" alt="Dawn Izach Cruz">
+                                        <div>
+                                            <div class="fw-bold small">Dawn Izach Cruz</div>
+                                            <div class="text-muted extra-small">Jr Full Stack Developer, Monte Carlo Technologies</div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="carousel-item">
+                                <div class="testimonial-mini p-4 rounded-3 border bg-surface">
+                                    <p class="small text-secondary italic mb-4">"Working with Nitro Tech Media has been a great experience. Their team is professional, responsive, and genuinely understands the needs of developer."</p>
+                                    <div class="d-flex align-items-center gap-3">
+                                        <img src="https://ui-avatars.com/api/?name=Ren+Alcantara&size=40&background=363636&color=fff" class="rounded-circle border" alt="Ren Alcantara">
+                                        <div>
+                                            <div class="fw-bold small">Ren Alcantara</div>
+                                            <div class="text-muted extra-small">Developer</div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="carousel-item">
+                                <div class="testimonial-mini p-4 rounded-3 border bg-surface">
+                                    <p class="small text-secondary italic mb-4">"Working with Bryan or Nitro Tech on our web development project has been a great experience. He is reliable, detail-oriented, and always ready to contribute effective solutions. His technical skills and willingness to collaborate make him a valuable part of the team."</p>
+                                    <div class="d-flex align-items-center gap-3">
+                                        <img src="https://ui-avatars.com/api/?name=Nikko&size=40&background=363636&color=fff" class="rounded-circle border" alt="Nikko">
+                                        <div>
+                                            <div class="fw-bold small">Nikko</div>
+                                            <div class="text-muted extra-small">Front End Developer</div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="carousel-item">
+                                <div class="testimonial-mini p-4 rounded-3 border bg-surface">
+                                    <p class="small text-secondary italic mb-4">"I have hands-on experience delivering full-stack features used in production, with a focus on usability and real business needs—from admin and user-facing systems to POS and CRUD modules, enabling efficient content management and streamlined operations."</p>
+                                    <div class="d-flex align-items-center gap-3">
+                                        <img src="https://ui-avatars.com/api/?name=Michael+Dela+Rosa&size=40&background=363636&color=fff" class="rounded-circle border" alt="Michael Dela Rosa">
+                                        <div>
+                                            <div class="fw-bold small">Michael Dela Rosa</div>
+                                            <div class="text-muted extra-small">Consultant</div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="carousel-item">
+                                <div class="testimonial-mini p-4 rounded-3 border bg-surface">
+                                    <p class="small text-secondary italic mb-4">"As a starting VA, I am very glad for the opportunity given to me by NTM. I am able to expand my skill set and knowledge. I am very thankful for the chance to experience the working field with NTM."</p>
+                                    <div class="d-flex align-items-center gap-3">
+                                        <img src="https://ui-avatars.com/api/?name=Francez+Aguila&size=40&background=363636&color=fff" class="rounded-circle border" alt="Francez Avienne T. Aguila">
+                                        <div>
+                                            <div class="fw-bold small">Francez Avienne T. Aguila</div>
+                                            <div class="text-muted extra-small">Virtual Assistant</div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="carousel-item">
+                                <div class="testimonial-mini p-4 rounded-3 border bg-surface">
+                                    <p class="small text-secondary italic mb-4">"Bryan is a highly competent web developer who clearly understands project requirements and delivers exactly what is needed. His technical expertise is evident in the quality and usability of the program he built for Stock Box Cafe—clean, efficient, and user-friendly. Easy to communicate with, accommodating to revisions, and reliable after-sales support."</p>
+                                    <div class="d-flex align-items-center gap-3">
+                                        <img src="https://ui-avatars.com/api/?name=Marlon+Garcia&size=40&background=363636&color=fff" class="rounded-circle border" alt="Marlon Garcia">
+                                        <div>
+                                            <div class="fw-bold small">Marlon Garcia</div>
+                                            <div class="text-muted extra-small">Owner, Stock Cafe</div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="carousel-item">
+                                <div class="testimonial-mini p-4 rounded-3 border bg-surface">
+                                    <p class="small text-secondary italic mb-4">"Working with Bryan of Nitro Tech Media has been a great experience. As Project Manager and Lead Developer, he communicates clearly, values design input, and turns UI/UX concepts into well-built, functional solutions. His leadership and technical expertise make collaboration smooth and efficient. I highly recommend Nitro Tech Media for quality tech and development work."</p>
+                                    <div class="d-flex align-items-center gap-3">
+                                        <img src="https://ui-avatars.com/api/?name=Dizelle+Cabugsa&size=40&background=363636&color=fff" class="rounded-circle border" alt="Dizelle Vhan Cabugsa">
+                                        <div>
+                                            <div class="fw-bold small">Dizelle Vhan Cabugsa</div>
+                                            <div class="text-muted extra-small">UI/UX Designer</div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <footer class="mt-5 pt-4 border-top">
+            <div class="row align-items-center">
+                <div class="col-md-6">
+                    <div class="text-muted extra-small mb-3 mb-md-0">&copy; 2019 — 2026 Bryan James Dela Luya. All rights reserved.</div>
+                </div>
+                <div class="col-md-6">
+                    <div class="d-flex gap-3 justify-content-md-end">
+                        <a href="#" class="text-muted text-decoration-none small d-flex align-items-center gap-1 hover-primary">
+                            <i data-lucide="github" size="14"></i> GitHub
+                        </a>
+                        <a href="#" class="text-muted text-decoration-none small d-flex align-items-center gap-1 hover-primary">
+                            <i data-lucide="linkedin" size="14"></i> LinkedIn
+                        </a>
+                        <a href="#" class="text-muted text-decoration-none small d-flex align-items-center gap-1 hover-primary">
+                            <i data-lucide="twitter" size="14"></i> Twitter
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </footer>
     </div>
-  </div>
 
-  <script>
-    document.addEventListener('DOMContentLoaded', () => {
-      const terminal = document.getElementById('terminal');
-      const commandInput = document.getElementById('commandInput');
-
-      commandInput.focus();
-
-      const maintainFocus = () => {
-        if (document.activeElement !== commandInput) {
-            commandInput.focus();
-        }
-    };
-
-    terminal.addEventListener('click', maintainFocus);
-    document.addEventListener('keydown', maintainFocus);
-
-        const commands = {
-        summary: () => `--------------------------------------------------------------------------------------------------------
-<strong>Senior Software Engineer | Technical Profile</strong>
-
-Senior software engnieer with over a decade of expertise in distributed systems, technical debt remediation, and high-availability infrastructure. Specialized in:
-• <strong>Legacy System Modernization</strong>: Leading multi-year initiatives to refactor monolithic PHP/Laravel applications into modular, maintainable services
-• <strong>Cloud-Native Architecture</strong>: AWS-based solutions with containerized deployments and CI/CD optimization
-• <strong>Performance Engineering</strong>: Query optimization (MySQL/Redis), concurrency patterns, and scaling strategies for 10K+ RPS systems
-• <strong>Technical Leadership</strong>: Establishing engineering standards, mentoring teams, and implementing governance for critical production systems
-
-Currently driving platform reliability and modernization efforts at Career Team, with focus on:
-- Security hardening and compliance remediation
-- Deployment pipeline automation (GitHub Actions)
-- Progressive migration to event-driven architectures
-
-Recognized for delivering complex technical transformations while maintaining 99.95% uptime SLA.`,
-
-    skills: () => `--------------------------------------------------------------------------------------------------------
-<strong>Technical Expertise | Principal Engineer Level</strong>
-
-<strong>Core Languages & Frameworks:</strong>
-• PHP (Laravel/Symfony Specialist): over a decade of building enterprise-grade applications
-• Modern JavaScript (Vue/React): Architecting complex SPA frontends
-• Legacy Ecosystem Mastery: CodeIgniter migration strategies, jQuery modernization paths
-
-<strong>Systems Architecture & API Design:</strong>
-• RESTful Microservices: Designed APIs serving 5M+ monthly requests
-• Auth Systems: OAuth2 Connect implementations
-• Payment Infrastructure: End-to-end PCI-compliant solutions (Stripe/PayPal/Bitpay)
-• Enterprise Integrations: ERP (Avalara), Logistics (ShipBob), Marketing Automation (Klaviyo)
-
-<strong>Data Layer Engineering:</strong>
-• SQL Optimization: MySQL/PostgreSQL performance tuning (explain plans, index strategies)
-• Redis Architectures: Caching layers, rate limiting, real-time features
-• Cloud Storage Patterns: AWS S3 lifecycle policies, RDS configurations
-
-<strong>DevOps & Platform Engineering:</strong>
-• Infrastructure as Code: Terraform-managed AWS environments
-• CI/CD Pipelines: GitHub Actions workflows, zero-downtime deployments
-• Production Systems: Ubuntu server hardening, SSL/TLS management
-• Queue Systems: Redis-backed job queues with failover mechanisms
-
-<strong>Specialized Competencies:</strong>
-• Legacy Modernization: Monolith decomposition strategies
-• Security Leadership: Conducted SOC2-aligned audits
-• Embedded Systems: Biometric/RFID integration (ZKTeco/SIM800C)
-• Scalable Patterns: Multi-tenant SaaS architectures, distributed POS systems`,
-
-experience: () => `--------------------------------------------------------------------------------------------------------
-<strong>Technical Leadership Experience</strong>
-
-<strong>CareerTeam LLC — Senior Software Engineer (May 2025-Present)</strong>
-• <u>Legacy Systems Modernization</u>: Lead architect for refactoring monolithic PHP applications into maintainable, testable services—reducing critical bugs by 60%
-• <u>Production Stability</u>: Diagnose and resolve Tier-1 client issues in SLA-bound environments (99.95% uptime)
-• <u>Security Leadership</u>: Implement OWASP standards, static analysis tooling, and audit trails across 15+ codebases
-• <u>SDLC Transformation</u>: Introduced GitFlow, automated testing (PHPUnit/Pest), and peer review workflows
-• <u>DevOps Governance</u>: Designed containerized deployment pipelines (Docker/GitHub Actions) reducing release cycles from days → hours
-
-<strong>Dog and Rooster, Inc. — Senior Software Engineer / Delivery Lead (May 2021–May 2025)</strong>
-• <u>Technical Leadership</u>: Established engineering standards and governance for 15+ concurrent Laravel projects
-• <u>Cloud Architecture</u>: Designed AWS ecosystems (EC2/RDS/) serving 500K+ monthly users
-• <u>API Strategy</u>: Architected REST/XML microservices for e-commerce/LMS platforms with 99.97% uptime
-• <u>DevOps</u>: Implemented zero-downtime deployment pipelines and automated monitoring solutions
-• <u>Legacy Modernization</u>: Led PHP 5.6→8.x migrations for mission-critical client systems
-
-<strong>Hiraya MNL — Senior Software Engineer (March 2020–June 2021)</strong>
-• <u>Full-Stack Architecture</u>: Delivered Vue.js/Laravel solutions with Inertia.js for dynamic SPAs
-• <u>Cross-Functional Leadership</u>: Served as technical liaison between design/backend teams
-• <u>Performance Optimization</u>: Reduced frontend bundle sizes by 42% through code-splitting
-
-<strong>Apptopus Inc. — Software Engineer → Tech Lead (March 2019–August 2020)</strong>
-• <u>Systems Architecture</u>: Built campus management platforms handling 10K+ daily transactions
-• <u>Hardware Integration</u>: Pioneered ZKTeco/SIM800C solutions for biometric attendance systems
-• <u>Technical Debt Reduction</u>: Refactored monolithic VB.NET/PHP systems to Laravel microservices
-
-<strong>Strategic Consulting Engagements (2018–Present)</strong>
-• <u>Enterprise Solutions</u>: Delivered 12+ production systems including:
-  - Multi-tenant POS/inventory platforms with barcode/RFID integrations
-  - PCI-compliant payment gateways (Stripe/PayPal/Authorize.net)
-  - AWS-hosted resort management systems with real-time booking engines
-• <u>Technical Advisory</u>: Modernized legacy codebases for Tepora Group, Granby Colleges, Amor Laut`,
-
-        projects: () => `--------------------------------------------------------------------------------------------------------
-<strong>Projects & Portfolio</strong>
-<strong>Key Projects:</strong>
-- Bullion Standard – High-integration Laravel e-commerce with OpenAI, Plaid, Bitpay
-- MuseRoom – Music sharing platform built on Laravel + VueJS
-- InjureFree – Laravel app for compliance and injury management
-- AMS – Biometric-based DTR + Payroll (ZKTeco)
-- MedStaff – Doctor booking platform with smart KYC module
-- Tradeline Supply – Fintech app built on Node.js, VueJS, MongoDB
-<strong>Portfolio Links:</strong>
-- https://museroom.co/
-- https://bullionstandard.com/
-- https://medstaff.care/
-- https://www.injurefree.com/`,
-
-        softskills: () => `--------------------------------------------------------------------------------------------------------
-<strong>Soft Skills & Leadership</strong>
-- Strong communicator with client-facing experience
-- Drives development standards, team workflows, and best practices
-- Experienced in Agile and startup environments
-- Leads code reviews and provides mentorship to junior developers
-- Strategic in analyzing and resolving legacy system issues`,
-
-        location: () => `--------------------------------------------------------------------------------------------------------
-<strong>Location & Availability</strong>
-Based in: Trece Martires City, Cavite, Philippines
-Open to: <s>Full-time</s>, Remote, or Contract work
-Availability: Immediate or negotiable`,
-
-        social: () => `--------------------------------------------------------------------------------------------------------
-<strong>Social Profiles</strong>
-GitHub: github.com/bcdl
-LinkedIn: linkedin.com/in/bjcdl`,
-
-        help: () => `<div class="info-output">Available commands:</div><div class="command-output">
-<span class="command-name">summary</span>    - Professional background and key qualifications  
-<span class="command-name">skills</span>     - Technical stack, tools, and engineering expertise  
-<span class="command-name">experience</span> - Work history, roles, and system architecture contributions  
-<span class="command-name">projects</span>   - Major technical implementations and case studies  
-<span class="command-name">softskills</span> - Leadership, communication, and problem-solving approach  
-<span class="command-name">location</span>   - Current timezone and remote work availability  
-<span class="command-name">social</span>     - Professional networks and open-source presence  
-<span class="command-name">clear</span>      - Reset terminal output  
-        </div>`,
-
-        clear: () => {
-            terminal.querySelectorAll('.terminal-output').forEach(el => el.remove());
-            return '';
-        }
-        };
-
-      function executeCommand(input) {
-        const line = document.createElement('div');
-        line.className = 'terminal-output';
-        line.innerHTML = `<span class="prompt">visitor@bjcdl:~$</span> ${input}`;
-        terminal.insertBefore(line, document.querySelector('.terminal-input-line'));
-
-        const cmd = input.trim().toLowerCase();
-        const output = commands[cmd]?.();
-        if (output !== undefined) {
-          const out = document.createElement('div');
-          out.className = 'terminal-output';
-          out.innerHTML = output;
-          terminal.insertBefore(out, document.querySelector('.terminal-input-line'));
-        } else {
-          const err = document.createElement('div');
-            err.className = 'terminal-output error-output';
-            err.innerHTML = `bash: ${cmd}: command not found
-Available commands: Type <span class="highlight">'help'</span> for options`;
-            terminal.insertBefore(err, document.querySelector('.terminal-input-line'));
-        }
-
-        terminal.scrollTop = terminal.scrollHeight;
-        commandInput.focus();
-      }
-
-      commandInput.addEventListener('keydown', e => {
-        if (e.key === 'Enter') {
-          const val = commandInput.value;
-          if (val) executeCommand(val);
-          commandInput.value = '';
-          e.preventDefault();
-        }
-      });
-
-      setInterval(maintainFocus, 1000);
-    });
-  </script>
+    <!-- Scripts -->
+    <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="js/script.js"></script>
 </body>
 </html>

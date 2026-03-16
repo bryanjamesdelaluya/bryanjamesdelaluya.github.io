@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en" data-bs-theme="dark">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" type="image/png" href="../../assets/favicon.png">
+    <title>Setting Up an LLM Locally with Ollama | Bryan James Dela Luya</title>
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+    <!-- Bootstrap 5 CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Lucide Icons -->
+    <script src="https://unpkg.com/lucide@latest"></script>
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="../../css/style.css">
+</head>
+<body>
+    <div class="main-container py-5">
+        <header class="header-tile mb-5 position-relative">
+            <button id="theme-toggle" class="btn btn-surface p-2 rounded-3 border position-absolute top-0 end-0 m-4" aria-label="Toggle theme">
+                <i data-lucide="sun" id="theme-icon-light" size="20"></i>
+                <i data-lucide="moon" id="theme-icon-dark" class="d-none" size="20"></i>
+            </button>
+            <a href="../index.html" class="btn btn-surface btn-sm px-3 rounded-3 border d-inline-flex align-items-center gap-2 mb-4">
+                <i data-lucide="arrow-left" size="16"></i> Back to Blog
+            </a>
+            <div class="text-muted extra-small mb-2">March 5, 2026 • 7 min read</div>
+            <h1 class="h1 fw-bold mb-0">Setting Up an LLM Locally with Ollama</h1>
+        </header>
+
+        <img src="https://images.unsplash.com/photo-1714846201670-1c5721196c7a?w=1000&h=400&fit=crop" class="img-fluid rounded-4 mb-5 border" alt="Local LLM setup">
+
+        <article class="tile p-5">
+            <div class="text-secondary leading-relaxed">
+                <p class="mb-4">Running a large language model on your own machine keeps your prompts and data local and avoids API costs. Ollama makes it straightforward: install, pull a model, and use the CLI or API from your dev environment.</p>
+
+                <h2 class="h4 fw-bold text-white mb-3">Why Run an LLM Locally?</h2>
+                <p class="mb-4">Local models are great for code completion, refactoring ideas, and experimenting without sending code to the cloud. Latency can be lower for small models, and you’re not tied to a vendor or rate limits.</p>
+
+                <h2 class="h4 fw-bold text-white mb-3">Install Ollama</h2>
+                <p class="mb-4">Download the installer from <a href="https://ollama.com" target="_blank" rel="noopener" class="text-primary">ollama.com</a> for Windows, macOS, or Linux. After install, the Ollama service runs in the background and exposes a local API.</p>
+
+                <h2 class="h4 fw-bold text-white mb-3">Pull a Model</h2>
+                <p class="mb-4">In a terminal, run <code class="bg-surface px-2 py-1 rounded">ollama pull llama3.2</code> (or another model like <code class="bg-surface px-2 py-1 rounded">codellama</code> for code). The first pull downloads the weights; after that, it’s available offline.</p>
+
+                <h2 class="h4 fw-bold text-white mb-3">Use It from the CLI or Your App</h2>
+                <p class="mb-4">Run <code class="bg-surface px-2 py-1 rounded">ollama run llama3.2</code> for an interactive chat. For integration with Laravel or any app, call <code class="bg-surface px-2 py-1 rounded">http://localhost:11434/api/generate</code> with a JSON body (model, prompt, stream). You can build a simple wrapper in PHP to keep prompts and responses in your control.</p>
+
+                <blockquote class="border-start border-primary border-4 ps-4 py-2 my-5 italic text-white bg-surface-hover rounded-3">
+                    "Local LLMs put experimentation and privacy in your hands—no API key required."
+                </blockquote>
+
+                <h2 class="h4 fw-bold text-white mb-3">Hardware Tips</h2>
+                <p class="mb-0">Smaller models (7B parameters) run fine on 8–16 GB RAM; larger ones need more. A GPU speeds things up if Ollama supports it on your OS. On a Raspberry Pi or low-spec machine, consider very small models or stick to cloud for heavy use.</p>
+            </div>
+        </article>
+
+        <footer class="mt-5 pt-4 border-top text-center">
+            <div class="text-muted extra-small">&copy; 2026 Bryan James Dela Luya</div>
+        </footer>
+    </div>
+    <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+    <script src="../../js/script.js"></script>
+    <script>
+        $(document).ready(function() { lucide.createIcons(); });
+    </script>
+</body>
+</html>
