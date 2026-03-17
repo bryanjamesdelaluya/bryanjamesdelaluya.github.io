@@ -36,23 +36,23 @@
             <div class="text-secondary leading-relaxed">
                 <p class="mb-4">Running a large language model on your own machine keeps your prompts and data local and avoids API costs. Ollama makes it straightforward: install, pull a model, and use the CLI or API from your dev environment.</p>
 
-                <h2 class="h4 fw-bold text-white mb-3">Why Run an LLM Locally?</h2>
+                <h2 class="h4 fw-bold text-emphasis mb-3">Why Run an LLM Locally?</h2>
                 <p class="mb-4">Local models are great for code completion, refactoring ideas, and experimenting without sending code to the cloud. Latency can be lower for small models, and you’re not tied to a vendor or rate limits.</p>
 
-                <h2 class="h4 fw-bold text-white mb-3">Install Ollama</h2>
+                <h2 class="h4 fw-bold text-emphasis mb-3">Install Ollama</h2>
                 <p class="mb-4">Download the installer from <a href="https://ollama.com" target="_blank" rel="noopener" class="text-primary">ollama.com</a> for Windows, macOS, or Linux. After install, the Ollama service runs in the background and exposes a local API.</p>
 
-                <h2 class="h4 fw-bold text-white mb-3">Pull a Model</h2>
+                <h2 class="h4 fw-bold text-emphasis mb-3">Pull a Model</h2>
                 <p class="mb-4">In a terminal, run <code class="bg-surface px-2 py-1 rounded">ollama pull llama3.2</code> (or another model like <code class="bg-surface px-2 py-1 rounded">codellama</code> for code). The first pull downloads the weights; after that, it’s available offline.</p>
 
-                <h2 class="h4 fw-bold text-white mb-3">Use It from the CLI or Your App</h2>
+                <h2 class="h4 fw-bold text-emphasis mb-3">Use It from the CLI or Your App</h2>
                 <p class="mb-4">Run <code class="bg-surface px-2 py-1 rounded">ollama run llama3.2</code> for an interactive chat. For integration with Laravel or any app, call <code class="bg-surface px-2 py-1 rounded">http://localhost:11434/api/generate</code> with a JSON body (model, prompt, stream). You can build a simple wrapper in PHP to keep prompts and responses in your control.</p>
 
-                <blockquote class="border-start border-primary border-4 ps-4 py-2 my-5 italic text-white bg-surface-hover rounded-3">
+                <blockquote class="border-start border-primary border-4 ps-4 py-2 my-5 italic text-emphasis bg-surface-hover rounded-3">
                     "Local LLMs put experimentation and privacy in your hands—no API key required."
                 </blockquote>
 
-                <h2 class="h4 fw-bold text-white mb-3">Hardware Tips</h2>
+                <h2 class="h4 fw-bold text-emphasis mb-3">Hardware Tips</h2>
                 <p class="mb-0">Smaller models (7B parameters) run fine on 8–16 GB RAM; larger ones need more. A GPU speeds things up if Ollama supports it on your OS. On a Raspberry Pi or low-spec machine, consider very small models or stick to cloud for heavy use.</p>
             </div>
         </article>

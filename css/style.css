@@ -48,6 +48,9 @@ body {
 .text-secondary { color: var(--text-secondary) !important; }
 .text-disabled { color: var(--text-disabled) !important; }
 
+/* Theme-aware emphasis: readable in both light and dark (replaces text-white in content) */
+.text-emphasis { color: var(--text) !important; }
+
 /* View More/Less */
 .experience-more {
     display: none;

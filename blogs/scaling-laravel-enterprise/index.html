@@ -36,20 +36,20 @@
             <div class="text-secondary leading-relaxed">
                 <p class="mb-4">Scaling a Laravel application for enterprise-level traffic requires more than a bigger server. It’s about stateless app design, caching, queues, and database strategy.</p>
 
-                <h2 class="h4 fw-bold text-white mb-3">1. Horizontal Scaling</h2>
+                <h2 class="h4 fw-bold text-emphasis mb-3">1. Horizontal Scaling</h2>
                 <p class="mb-4">Add more app servers behind a load balancer (e.g. AWS ELB) instead of scaling a single box. Laravel works well with this as long as sessions and cache are externalized so any instance can handle any request.</p>
 
-                <h2 class="h4 fw-bold text-white mb-3">2. Redis for Sessions and Cache</h2>
+                <h2 class="h4 fw-bold text-emphasis mb-3">2. Redis for Sessions and Cache</h2>
                 <p class="mb-4">Use Redis for session and cache drivers. That keeps the app stateless and avoids file-based sessions. Use it for queue driver too so you can run workers on separate processes or machines.</p>
 
-                <h2 class="h4 fw-bold text-white mb-3">3. Database Read/Write Split</h2>
+                <h2 class="h4 fw-bold text-emphasis mb-3">3. Database Read/Write Split</h2>
                 <p class="mb-4">Send writes to the primary and reads to replicas. Laravel’s DB config supports this. It reduces load on the primary and improves response times for read-heavy pages.</p>
 
-                <blockquote class="border-start border-primary border-4 ps-4 py-2 my-5 italic text-white bg-surface-hover rounded-3">
+                <blockquote class="border-start border-primary border-4 ps-4 py-2 my-5 italic text-emphasis bg-surface-hover rounded-3">
                     "Scaling is not just about handling more users; it’s about doing it without losing performance or clarity."
                 </blockquote>
 
-                <h2 class="h4 fw-bold text-white mb-3">4. Queues and Horizon</h2>
+                <h2 class="h4 fw-bold text-emphasis mb-3">4. Queues and Horizon</h2>
                 <p class="mb-0">Move heavy work (emails, reports, image processing) to queues and run them with Laravel Horizon. That keeps HTTP requests fast and gives you a clear view of job throughput and failures.</p>
             </div>
         </article>
