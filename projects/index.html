@@ -161,6 +161,33 @@
     <script>
         $(document).ready(function() {
             lucide.createIcons();
+            // Theme toggle (inline so it works even if script.js path fails)
+            var $html = $('html');
+            var $iconLight = $('#theme-icon-light');
+            var $iconDark = $('#theme-icon-dark');
+            var saved = localStorage.getItem('theme');
+            var prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+            var theme = saved || (prefersDark ? 'dark' : 'light');
+            $html.attr('data-bs-theme', theme);
+            if (theme === 'dark') {
+                $iconLight.addClass('d-none');
+                $iconDark.removeClass('d-none');
+            } else {
+                $iconLight.removeClass('d-none');
+                $iconDark.addClass('d-none');
+            }
+            $('#theme-toggle').on('click', function() {
+                var next = $html.attr('data-bs-theme') === 'dark' ? 'light' : 'dark';
+                $html.attr('data-bs-theme', next);
+                localStorage.setItem('theme', next);
+                if (next === 'dark') {
+                    $iconLight.addClass('d-none');
+                    $iconDark.removeClass('d-none');
+                } else {
+                    $iconLight.removeClass('d-none');
+                    $iconDark.addClass('d-none');
+                }
+            });
         });
     </script>
 </body>
