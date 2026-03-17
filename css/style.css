@@ -96,6 +96,22 @@ body {
     box-shadow: none;
     outline: none;
 }
+/* Filled surface button – same look as primary but same click behavior as btn-surface (no blue) */
+.btn-surface-fill {
+    background-color: var(--primary);
+    color: var(--primary-text) !important;
+    border-color: var(--primary);
+}
+.btn-surface-fill:hover,
+.btn-surface-fill:active,
+.btn-surface-fill:focus,
+.btn-surface-fill:focus-visible {
+    background-color: var(--primary);
+    color: var(--primary-text) !important;
+    border-color: var(--primary);
+    box-shadow: none !important;
+    outline: none !important;
+}
 
 /* Profile */
 .profile-img {
