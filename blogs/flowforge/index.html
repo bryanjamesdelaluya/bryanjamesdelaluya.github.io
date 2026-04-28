@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en" data-bs-theme="dark">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" type="image/png" href="../../assets/favicon.png">
+    <title>How We Built FlowForge — Workflows, Tickets & Client Requests in One Place | Bryan James Dela Luya</title>
+    <meta name="description" content="FlowForge is a Laravel-powered workflow platform: Kanban boards, ticket workflows, and client request management—so teams stop chasing updates across chat, sheets, and email.">
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+    <!-- Bootstrap 5 CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Lucide Icons -->
+    <script src="https://unpkg.com/lucide@latest"></script>
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="../../css/style.css">
+</head>
+<body>
+    <div class="main-container py-5">
+        <header class="header-tile mb-5 position-relative">
+            <button id="theme-toggle" class="btn btn-surface p-2 rounded-3 border position-absolute top-0 end-0 m-4" aria-label="Toggle theme">
+                <i data-lucide="sun" id="theme-icon-light" size="20"></i>
+                <i data-lucide="moon" id="theme-icon-dark" class="d-none" size="20"></i>
+            </button>
+            <a href="../" class="btn btn-surface btn-sm px-3 rounded-3 border d-inline-flex align-items-center gap-2 mb-4">
+                <i data-lucide="arrow-left" size="16"></i> Back to Blog
+            </a>
+            <div class="text-muted extra-small mb-2">April 28, 2026 • 4 min read</div>
+            <h1 class="h1 fw-bold mb-0">How We Built FlowForge — Workflows, Tickets &amp; Client Requests in One Place</h1>
+        </header>
+
+        <img src="https://nitrotechmedia.com/assets/images/portfolio/flowforge.png" class="img-fluid rounded-4 mb-5 border" alt="FlowForge ticket board with Kanban lanes and sprint controls">
+
+        <article class="tile p-5">
+            <div class="text-secondary leading-relaxed">
+                <p class="mb-4">Growing teams often run operations through a patchwork of <strong class="text-emphasis">chat apps</strong>, <strong class="text-emphasis">spreadsheets</strong>, and <strong class="text-emphasis">long email threads</strong>. Updates get buried, accountability blurs, and someone is always asking “what’s the status?” We wanted a single place where work stays visible—from backlog to shipped—without forcing everyone into yet another heavyweight tool.</p>
+
+                <p class="mb-4">That’s why we built <strong class="text-emphasis">FlowForge</strong>: a centralized <strong class="text-emphasis">workflow management platform</strong> at <a href="https://nitrotechmedia.com" target="_blank" rel="noopener" class="text-emphasis text-decoration-underline">Nitro Tech Media</a> for tasks, tickets, and structured client communication.</p>
+
+                <blockquote class="border-start border-primary border-4 ps-4 py-2 my-5 italic text-emphasis bg-surface-hover rounded-3">
+                    One system for boards, requests, and follow-ups—so teams spend less time chasing status and more time shipping.
+                </blockquote>
+
+                <h2 class="h4 fw-bold text-emphasis mb-3">What FlowForge Covers</h2>
+                <p class="mb-4"><strong class="text-emphasis">Development boards</strong> give teams Kanban-style lanes to assign ownership and move work from idea to completion. <strong class="text-emphasis">Ticket workflows</strong> centralize internal issues, support items, and service requests with clearer priority and routing. <strong class="text-emphasis">Client request management</strong> ties incoming asks to reference IDs, statuses, and communication so nothing disappears into a vague “we’ll get back to you.” The UI is built to stay approachable on <strong class="text-emphasis">desktop, tablet, and mobile</strong>—because operations don’t stop when someone steps away from a desk.</p>
+
+                <h2 class="h4 fw-bold text-emphasis mb-3">Stack We Chose</h2>
+                <p class="mb-4">We implemented FlowForge with <strong class="text-emphasis">Laravel</strong> on the backend for authentication, workflow logic, and secure data handling. <strong class="text-emphasis">Bootstrap</strong> keeps layouts consistent and responsive across breakpoints. <strong class="text-emphasis">jQuery</strong> powers the interactive pieces—forms, inline updates, and navigation—without overcomplicating the front end. The goal was a platform that feels fast to use day to day and straightforward to maintain as features grow.</p>
+
+                <h2 class="h4 fw-bold text-emphasis mb-3">Why It Matters</h2>
+                <p class="mb-4">Operational clarity is not a nice-to-have; it directly affects how quickly a business can respond and scale. When priorities, owners, and next steps live in one system, you reduce manual follow-ups and make it easier for new people to onboard. FlowForge is aimed at teams that need <strong class="text-emphasis">structure without unnecessary complexity</strong>—the same philosophy we bring to other custom internal tools we build for clients.</p>
+
+                <h2 class="h4 fw-bold text-emphasis mb-3">Learn More</h2>
+                <p class="mb-4">For a short overview, see the portfolio piece; for deliverables, metrics, and business context, the full case study goes deeper.</p>
+
+                <div class="d-flex flex-wrap gap-3 mb-4">
+                    <a href="https://nitrotechmedia.com/portfolio/flowforge" target="_blank" rel="noopener" class="btn btn-surface btn-surface-fill rounded-3 d-inline-flex align-items-center gap-2">
+                        <i data-lucide="layout-grid" size="18"></i> Portfolio — FlowForge
+                    </a>
+                    <a href="https://nitrotechmedia.com/case-studies/flowforge" target="_blank" rel="noopener" class="btn btn-surface rounded-3 border d-inline-flex align-items-center gap-2">
+                        <i data-lucide="file-text" size="18"></i> Case study
+                    </a>
+                </div>
+
+                <p class="mb-0 text-muted small">If you’re weighing a similar internal platform—boards, tickets, client intake, or all of the above—we’re happy to map architecture and phased delivery around how your team actually works.</p>
+            </div>
+        </article>
+
+        <footer class="mt-5 pt-4 border-top text-center">
+            <div class="text-muted extra-small">&copy; 2026 Bryan James Dela Luya</div>
+        </footer>
+    </div>
+    <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+    <script src="../../js/script.js"></script>
+    <script>
+        $(document).ready(function() { lucide.createIcons(); });
+    </script>
+</body>
+</html>
