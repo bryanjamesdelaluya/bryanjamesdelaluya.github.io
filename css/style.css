@@ -245,7 +245,7 @@ body {
     }
 }
 
-/* Buttons: lift on hover, no color change on hover or click (match Back to Dashboard / btn-surface) */
+/* Buttons: lift on hover, no color change on hover or click (match Back to Home page / btn-surface) */
 .btn {
     transition: transform 0.2s ease, box-shadow 0.2s ease;
 }
@@ -258,7 +258,7 @@ body {
 .btn.show {
     transform: translateY(0);
 }
-/* No blue focus ring – same as Back to Dashboard */
+/* No blue focus ring – same as Back to Home page */
 .btn:active,
 .btn:focus,
 .btn:focus-visible {
