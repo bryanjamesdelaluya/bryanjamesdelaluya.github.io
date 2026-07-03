@@ -93,34 +93,24 @@ button { font-family: inherit; }
 .nav-inner {
     display: flex;
     align-items: center;
-    justify-content: space-between;
     gap: 1rem;
     height: 68px;
 }
 
-.brand {
-    display: inline-flex;
+.nav-end {
+    display: flex;
     align-items: center;
-    gap: 0.65rem;
+    gap: 1.25rem;
+    margin-left: auto;
+}
+
+.brand {
+    display: inline-block;
     color: var(--text);
     font-size: 1rem;
     font-weight: 600;
     letter-spacing: -0.01em;
     white-space: nowrap;
-}
-
-.brand-mark {
-    display: grid;
-    place-items: center;
-    width: 32px;
-    height: 32px;
-    border-radius: 8px;
-    background: var(--accent);
-    color: #fff;
-    font-size: 0.72rem;
-    font-weight: 700;
-    letter-spacing: 0.02em;
-    flex-shrink: 0;
 }
 
 .nav-links {
@@ -142,6 +132,8 @@ button { font-family: inherit; }
 .nav-links a:hover { color: var(--text); }
 
 .nav-actions { display: flex; align-items: center; gap: 0.25rem; }
+
+.nav-inner > .nav-actions { margin-left: auto; }
 
 .icon-btn {
     display: inline-flex;
@@ -201,7 +193,11 @@ button { font-family: inherit; }
     letter-spacing: -0.03em;
 }
 
-.hero-title .dot { color: var(--accent); }
+.hero-identity {
+    margin-top: 1rem;
+    font-size: 1.05rem;
+    color: var(--text-2);
+}
 
 .hero-sub {
     margin-top: 1rem;
@@ -851,5 +847,5 @@ a.item-row:hover h2, a.item-row:hover h3 { color: var(--accent); }
 }
 
 @media (max-width: 419.98px) {
-    .brand span:last-child { display: none; }
+    .hero-photo { width: 76px; height: 76px; }
 }
