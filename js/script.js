@@ -1,81 +1,62 @@
-$(document).ready(function() {
-    // Initialize Lucide Icons
-    lucide.createIcons();
+(function () {
+    'use strict';
 
-    // Theme Toggle Logic
-    const themeToggle = $('#theme-toggle');
-    const themeIconLight = $('#theme-icon-light');
-    const themeIconDark = $('#theme-icon-dark');
-    const htmlElement = $('html');
+    var root = document.documentElement;
 
-    // Check for saved theme preference
-    const savedTheme = localStorage.getItem('theme');
-    const systemPrefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
-
-    if (savedTheme) {
-        setTheme(savedTheme);
-    } else if (systemPrefersDark) {
-        setTheme('dark');
-    } else {
-        setTheme('light');
-    }
-
-    themeToggle.on('click', function() {
-        const currentTheme = htmlElement.attr('data-bs-theme');
-        const newTheme = currentTheme === 'dark' ? 'light' : 'dark';
-        setTheme(newTheme);
-    });
-
-    function setTheme(theme) {
-        htmlElement.attr('data-bs-theme', theme);
+    function applyTheme(theme) {
+        root.setAttribute('data-theme', theme);
         localStorage.setItem('theme', theme);
-        
-        if (theme === 'dark') {
-            themeIconLight.addClass('d-none');
-            themeIconDark.removeClass('d-none');
-        } else {
-            themeIconLight.removeClass('d-none');
-            themeIconDark.addClass('d-none');
-        }
     }
 
-    // Reveal animations on scroll
-    const revealElements = $('.tile, .header-tile, .testimonial-mini');
-    $(window).on('scroll', function() {
-        revealElements.each(function() {
-            const elementTop = $(this).offset().top;
-            const windowBottom = $(window).scrollTop() + $(window).height();
-            if (windowBottom > elementTop + 50) {
-                $(this).addClass('revealed');
-            }
-        });
-    });
+    // Theme is pre-applied by the inline head script (avoids flash); keep in sync here.
+    var saved = localStorage.getItem('theme');
+    if (!saved) {
+        saved = window.matchMedia('(prefers-color-scheme: light)').matches ? 'light' : 'dark';
+    }
+    applyTheme(saved);
 
-    // Initial state for reveal
-    revealElements.css({
-        'opacity': '0',
-        'transform': 'translateY(10px)',
-        'transition': 'all 0.5s ease-out'
-    });
+    document.addEventListener('DOMContentLoaded', function () {
+        if (window.lucide) lucide.createIcons();
 
-    // Add a class for revealed state
-    $('<style>.revealed { opacity: 1 !important; transform: translateY(0) !important; }</style>').appendTo('head');
+        var themeToggle = document.getElementById('theme-toggle');
+        if (themeToggle) {
+            themeToggle.addEventListener('click', function () {
+                applyTheme(root.getAttribute('data-theme') === 'dark' ? 'light' : 'dark');
+            });
+        }
 
-    // Trigger once for initial view
-    setTimeout(() => $(window).trigger('scroll'), 100);
+        var header = document.querySelector('.site-header');
+        if (header) {
+            var onScroll = function () {
+                header.classList.toggle('scrolled', window.scrollY > 4);
+            };
+            window.addEventListener('scroll', onScroll, { passive: true });
+            onScroll();
+        }
 
-    // Experience Toggle
-    const toggleBtn = $('#toggleExperience');
-    const experienceMore = $('#experienceMore');
+        var expToggle = document.getElementById('toggleExperience');
+        var expMore = document.getElementById('experienceMore');
+        if (expToggle && expMore) {
+            expToggle.addEventListener('click', function () {
+                var showing = expMore.classList.toggle('show');
+                expToggle.querySelector('.label').textContent = showing ? 'Show less' : 'Show all';
+            });
+        }
 
-    toggleBtn.on('click', function() {
-        experienceMore.toggleClass('show');
-        const isShowing = experienceMore.hasClass('show');
-        toggleBtn.text(isShowing ? 'View Less' : 'View More');
-        
-        // Re-trigger scroll reveal for newly shown items
-        if (isShowing) {
-            $(window).trigger('scroll');
+        var track = document.getElementById('t-track');
+        if (track) {
+            var step = function () {
+                var card = track.querySelector('.t-card');
+                return card ? card.getBoundingClientRect().width + 16 : 340;
+            };
+            var prev = document.getElementById('t-prev');
+            var next = document.getElementById('t-next');
+            if (prev) prev.addEventListener('click', function () {
+                track.scrollBy({ left: -step(), behavior: 'smooth' });
+            });
+            if (next) next.addEventListener('click', function () {
+                track.scrollBy({ left: step(), behavior: 'smooth' });
+            });
         }
     });
-});
+})();
