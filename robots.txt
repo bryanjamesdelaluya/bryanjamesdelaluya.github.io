@@ -1,0 +1,7 @@
+User-agent: *
+Disallow: /blogs/nitro-tech-media-launch/
+Disallow: /blogs/archived-unpublished/
+Disallow: /blogs/caito-gmm-membership/
+Disallow: /blogs/better-trece-martires/
+Disallow: /blogs/msme-day-cavite/
+Disallow: /blogs/ctbex-2026/
